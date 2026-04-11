@@ -22,6 +22,7 @@ import {
 } from "./bash-tools.js";
 import { listChannelAgentTools } from "./channel-tools.js";
 import { createOpenClawTools } from "./openclaw-tools.js";
+import { mcpManager } from "../plugins/mcp.js";
 import { wrapToolWithAbortSignal } from "./pi-tools.abort.js";
 import { wrapToolWithBeforeToolCallHook } from "./pi-tools.before-tool-call.js";
 import {
@@ -113,6 +114,8 @@ export const __testing = {
 } as const;
 
 export function createOpenClawCodingTools(options?: {
+  /** Optional pre-loaded MCP tools. */
+  mcpTools?: AnyAgentTool[];
   exec?: ExecToolDefaults & ProcessToolDefaults;
   messageProvider?: string;
   agentAccountId?: string;
@@ -313,6 +316,7 @@ export function createOpenClawCodingTools(options?: {
         });
   const tools: AnyAgentTool[] = [
     ...base,
+    ...(options?.mcpTools ?? []),
     ...(sandboxRoot
       ? allowWorkspaceWrites
         ? [createSandboxedEditTool(sandboxRoot), createSandboxedWriteTool(sandboxRoot)]
