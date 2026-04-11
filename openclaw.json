@@ -1,0 +1,657 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "anthropic/claude-3-5-sonnet-latest",
+      "sandbox": {
+        "mode": "non-main",
+        "workspaceAccess": "rw"
+      }
+    },
+    "list": [
+      {
+        "id": "profit-king-ceo",
+        "name": "Profit King CEO",
+        "workspace": "company/brands/Profit King/ceo",
+        "model": "anthropic/claude-3-7-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-cto",
+        "name": "Profit King Chief Technology Officer",
+        "workspace": "company/brands/Profit King/departments/product-engineering/cto",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-product-manager",
+        "name": "Profit King Product Manager",
+        "workspace": "company/brands/Profit King/departments/product-engineering/product-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-software-engineer",
+        "name": "Profit King Software Engineer",
+        "workspace": "company/brands/Profit King/departments/product-engineering/software-engineer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-qa-test-engineer",
+        "name": "Profit King QA/Test Engineer",
+        "workspace": "company/brands/Profit King/departments/product-engineering/qa-test-engineer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-devops-engineer",
+        "name": "Profit King DevOps Engineer",
+        "workspace": "company/brands/Profit King/departments/product-engineering/devops-engineer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-ui-ux-designer",
+        "name": "Profit King UI/UX Designer",
+        "workspace": "company/brands/Profit King/departments/product-engineering/ui-ux-designer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-cmo",
+        "name": "Profit King Chief Marketing Officer",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/cmo",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-content-strategist",
+        "name": "Profit King Content Strategist",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/content-strategist",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-copywriter",
+        "name": "Profit King Copywriter",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/copywriter",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-media-buyer",
+        "name": "Profit King Media Buyer",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/media-buyer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-seo-specialist",
+        "name": "Profit King SEO Specialist",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/seo-specialist",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-social-media-manager",
+        "name": "Profit King Social Media Manager",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/social-media-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-funnel-builder",
+        "name": "Profit King Funnel Builder",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/funnel-builder",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-email-marketing-manager",
+        "name": "Profit King Email Marketing Manager",
+        "workspace": "company/brands/Profit King/departments/growth-marketing/email-marketing-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-cro",
+        "name": "Profit King Chief Revenue Officer",
+        "workspace": "company/brands/Profit King/departments/sales/cro",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-sales-strategist",
+        "name": "Profit King Sales Strategist",
+        "workspace": "company/brands/Profit King/departments/sales/sales-strategist",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-sdr",
+        "name": "Profit King Sales Development Representative",
+        "workspace": "company/brands/Profit King/departments/sales/sdr",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-closer",
+        "name": "Profit King Closer",
+        "workspace": "company/brands/Profit King/departments/sales/closer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-partnership-manager",
+        "name": "Profit King Partnership Manager",
+        "workspace": "company/brands/Profit King/departments/sales/partnership-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-head-of-customer-success",
+        "name": "Profit King Head of Customer Success",
+        "workspace": "company/brands/Profit King/departments/customer-success/head-of-customer-success",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-support-agent",
+        "name": "Profit King Support Agent",
+        "workspace": "company/brands/Profit King/departments/customer-success/support-agent",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-onboarding-specialist",
+        "name": "Profit King Onboarding Specialist",
+        "workspace": "company/brands/Profit King/departments/customer-success/onboarding-specialist",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-retention-manager",
+        "name": "Profit King Retention Manager",
+        "workspace": "company/brands/Profit King/departments/customer-success/retention-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-coo",
+        "name": "Profit King Chief Operating Officer",
+        "workspace": "company/brands/Profit King/departments/operations/coo",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-project-manager",
+        "name": "Profit King Project Manager",
+        "workspace": "company/brands/Profit King/departments/operations/project-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-process-optimizer",
+        "name": "Profit King Process Optimizer",
+        "workspace": "company/brands/Profit King/departments/operations/process-optimizer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-automation-engineer",
+        "name": "Profit King Automation Engineer",
+        "workspace": "company/brands/Profit King/departments/operations/automation-engineer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-chief-data-officer",
+        "name": "Profit King Chief Data Officer",
+        "workspace": "company/brands/Profit King/departments/data-intelligence/chief-data-officer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-data-analyst",
+        "name": "Profit King Data Analyst",
+        "workspace": "company/brands/Profit King/departments/data-intelligence/data-analyst",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-bi-agent",
+        "name": "Profit King Business Intelligence Agent",
+        "workspace": "company/brands/Profit King/departments/data-intelligence/bi-agent",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-experimentation-manager",
+        "name": "Profit King Experimentation Manager",
+        "workspace": "company/brands/Profit King/departments/data-intelligence/experimentation-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-cfo",
+        "name": "Profit King Chief Financial Officer",
+        "workspace": "company/brands/Profit King/departments/finance-legal/cfo",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-accountant",
+        "name": "Profit King Accountant",
+        "workspace": "company/brands/Profit King/departments/finance-legal/accountant",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-financial-planner",
+        "name": "Profit King Financial Planner",
+        "workspace": "company/brands/Profit King/departments/finance-legal/financial-planner",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-compliance-agent",
+        "name": "Profit King Compliance Agent",
+        "workspace": "company/brands/Profit King/departments/finance-legal/compliance-agent",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-security-officer",
+        "name": "Profit King Security Officer",
+        "workspace": "company/brands/Profit King/departments/security-risk/security-officer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-risk-analyst",
+        "name": "Profit King Risk Analyst",
+        "workspace": "company/brands/Profit King/departments/security-risk/risk-analyst",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-fraud-detection-agent",
+        "name": "Profit King Fraud Detection Agent",
+        "workspace": "company/brands/Profit King/departments/security-risk/fraud-detection-agent",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-head-of-research",
+        "name": "Profit King Head of Research",
+        "workspace": "company/brands/Profit King/departments/innovation-rd/head-of-research",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-experimentation-agent",
+        "name": "Profit King Experimentation Agent",
+        "workspace": "company/brands/Profit King/departments/innovation-rd/experimentation-agent",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-prototype-builder",
+        "name": "Profit King Prototype Builder",
+        "workspace": "company/brands/Profit King/departments/innovation-rd/prototype-builder",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-auditor",
+        "name": "Profit King Auditor",
+        "workspace": "company/brands/Profit King/departments/meta-control/auditor",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-task-validator",
+        "name": "Profit King Task Validator",
+        "workspace": "company/brands/Profit King/departments/meta-control/task-validator",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-memory-manager",
+        "name": "Profit King Memory Manager",
+        "workspace": "company/brands/Profit King/departments/meta-control/memory-manager",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "profit-king-prompt-engineer",
+        "name": "Profit King Prompt Engineer",
+        "workspace": "company/brands/Profit King/departments/meta-control/prompt-engineer",
+        "model": "anthropic/claude-3-5-sonnet-latest",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "tools": {
+          "profile": "full"
+        }
+      }
+    ]
+  }
+}
