@@ -19,6 +19,8 @@ import { createSessionsSpawnTool } from "./tools/sessions-spawn-tool.js";
 import { createTtsTool } from "./tools/tts-tool.js";
 import { createWebFetchTool, createWebSearchTool } from "./tools/web-tools.js";
 import { createJournalTool } from "./tools/journal-tool.js";
+import { createMemorySynthesizeTool } from "./tools/memory-synthesis-tool.js";
+import { mcpManager } from "../plugins/mcp.js";
 
 export function createOpenClawTools(options?: {
   sandboxBrowserBridgeUrl?: string;
@@ -147,12 +149,23 @@ export function createOpenClawTools(options?: {
     ...(webSearchTool ? [webSearchTool] : []),
     ...(webFetchTool ? [webFetchTool] : []),
     ...(imageTool ? [imageTool] : []),
-    ...(options?.workspaceDir ? [createJournalTool({
-      config: options?.config,
-      agentSessionKey: options?.agentSessionKey,
-      workspaceDir: options?.workspaceDir
-    })] : []).filter(Boolean) as AnyAgentTool[],
+    ...(options?.workspaceDir ? [
+      createJournalTool({
+        config: options?.config,
+        agentSessionKey: options?.agentSessionKey,
+        workspaceDir: options?.workspaceDir
+      }),
+      createMemorySynthesizeTool({
+        config: options?.config,
+        agentSessionKey: options?.agentSessionKey,
+        workspaceDir: options?.workspaceDir
+      })
+    ] : []).filter(Boolean) as AnyAgentTool[],
   ];
+
+  // Note: createOpenClawTools is synchronous, but MCP initialization is async.
+  // We will need to rethink this or use a registry.
+  // For now, we'll keep the structure.
 
   const pluginTools = resolvePluginTools({
     context: {

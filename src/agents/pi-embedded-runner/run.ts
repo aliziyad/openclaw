@@ -47,6 +47,7 @@ import { normalizeUsage, type UsageLike } from "../usage.js";
 import { compactEmbeddedPiSessionDirect } from "./compact.js";
 import { resolveGlobalLane, resolveSessionLane } from "./lanes.js";
 import { log } from "./logger.js";
+import { generateStrategyBrief } from "../strategy-brief.js";
 import { resolveModel } from "./model.js";
 import { runEmbeddedAttempt } from "./run/attempt.js";
 import { buildEmbeddedRunPayloads } from "./run/payloads.js";
@@ -305,6 +306,13 @@ export async function runEmbeddedPiAgent(
 
       let overflowCompactionAttempted = false;
       try {
+        const strategyBrief = await generateStrategyBrief({
+          config: params.config ?? {},
+          agentId: sessionAgentId,
+          prompt: params.prompt,
+          sessionKey: params.sessionKey,
+        });
+
         while (true) {
           attemptedThinking.add(thinkLevel);
           await fs.mkdir(resolvedWorkspace, { recursive: true });
@@ -313,6 +321,11 @@ export async function runEmbeddedPiAgent(
             provider === "anthropic" ? scrubAnthropicRefusalMagic(params.prompt) : params.prompt;
 
           const attempt = await runEmbeddedAttempt({
+            extraSystemPrompt: strategyBrief
+              ? params.extraSystemPrompt
+                ? `${strategyBrief}\n\n${params.extraSystemPrompt}`
+                : strategyBrief
+              : params.extraSystemPrompt,
             sessionId: params.sessionId,
             sessionKey: params.sessionKey,
             messageChannel: params.messageChannel,

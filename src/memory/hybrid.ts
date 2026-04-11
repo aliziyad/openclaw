@@ -105,6 +105,8 @@ export function mergeHybridResults(params: {
     // Prioritize Captain's Journal and SOP entries
     if (entry.path.startsWith("memory/journals/")) {
       score *= 1.5;
+    } else if (entry.path.startsWith("memory/sops/")) {
+      score *= 1.4; // Synthesized SOPs get higher priority than raw ones
     } else if (entry.path.includes("/SOP/") || entry.path.includes("/sop/") || entry.path.startsWith("sop/")) {
       score *= 1.3;
     }

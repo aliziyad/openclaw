@@ -569,10 +569,16 @@ export async function runHeartbeatOnce(opts: {
   // If so, use a specialized prompt that instructs the model to relay the result
   // instead of the standard heartbeat prompt with "reply HEARTBEAT_OK".
   const isExecEvent = opts.reason === "exec-event";
-  const pendingEvents = isExecEvent ? peekSystemEvents(sessionKey) : [];
+  const pendingEvents = peekSystemEvents(sessionKey);
   const hasExecCompletion = pendingEvents.some((evt) => evt.includes("Exec finished"));
 
-  const prompt = hasExecCompletion ? EXEC_EVENT_PROMPT : resolveHeartbeatPrompt(cfg, heartbeat);
+  let prompt = hasExecCompletion ? EXEC_EVENT_PROMPT : resolveHeartbeatPrompt(cfg, heartbeat);
+
+  // Advanced Heartbeat Intelligence: Include system state summary
+  if (pendingEvents.length > 0 && !hasExecCompletion) {
+    const summary = pendingEvents.map(evt => `- ${evt}`).join("\n");
+    prompt = `### SYSTEM STATE SUMMARY\n${summary}\n\n${prompt}`;
+  }
   const ctx = {
     Body: prompt,
     From: sender,

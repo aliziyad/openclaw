@@ -44,6 +44,7 @@ import {
 } from "../../pi-settings.js";
 import { toClientToolDefinitions } from "../../pi-tool-definition-adapter.js";
 import { createOpenClawCodingTools } from "../../pi-tools.js";
+import { mcpManager } from "../../../plugins/mcp.js";
 import { resolveSandboxContext } from "../../sandbox.js";
 import { resolveSandboxRuntimeStatus } from "../../sandbox/runtime-status.js";
 import { repairSessionFileIfNeeded } from "../../session-file-repair.js";
@@ -205,9 +206,16 @@ export async function runEmbeddedAttempt(
 
     // Check if the model supports native image input
     const modelHasVision = params.model.input?.includes("image") ?? false;
+
+    // Load MCP tools if enabled
+    const mcpTools = params.disableTools || !params.config?.mcp?.enabled
+      ? []
+      : await mcpManager.getTools(params.config);
+
     const toolsRaw = params.disableTools
       ? []
       : createOpenClawCodingTools({
+          mcpTools,
           exec: {
             ...params.execOverrides,
             elevated: params.bashElevated,

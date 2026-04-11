@@ -13,6 +13,7 @@ import type {
 } from "./types.gateway.js";
 import type { HooksConfig } from "./types.hooks.js";
 import type { MemoryConfig } from "./types.memory.js";
+import type { McpConfig } from "./types.mcp.js";
 import type {
   AudioConfig,
   BroadcastConfig,
@@ -97,6 +98,7 @@ export type OpenClawConfig = {
   talk?: TalkConfig;
   gateway?: GatewayConfig;
   memory?: MemoryConfig;
+  mcp?: McpConfig;
 };
 
 export type ConfigValidationIssue = {
