@@ -14,6 +14,7 @@ import type {
 import type { HooksConfig } from "./types.hooks.js";
 import type { MemoryConfig } from "./types.memory.js";
 import type { McpConfig } from "./types.mcp.js";
+import type { BusinessConfig, EmployeeConfig } from "./types.business.js";
 import type {
   AudioConfig,
   BroadcastConfig,
@@ -99,6 +100,8 @@ export type OpenClawConfig = {
   gateway?: GatewayConfig;
   memory?: MemoryConfig;
   mcp?: McpConfig;
+  business?: BusinessConfig;
+  employees?: EmployeeConfig[];
 };
 
 export type ConfigValidationIssue = {

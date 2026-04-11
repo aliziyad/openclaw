@@ -1,5 +1,6 @@
 import type { OpenClawConfig } from "../config/config.js";
 import type { ModelCatalogEntry } from "./model-catalog.js";
+import { budgetManager } from "../infra/budget-manager.js";
 import { resolveAgentModelPrimary } from "./agent-scope.js";
 import { DEFAULT_MODEL, DEFAULT_PROVIDER } from "./defaults.js";
 import { normalizeGoogleModelId } from "./models-config.providers.js";
@@ -203,7 +204,25 @@ export function resolveConfiguredModelRef(params: {
 export function resolveDefaultModelForAgent(params: {
   cfg: OpenClawConfig;
   agentId?: string;
+  taskComplexity?: "low" | "medium" | "high";
 }): ModelRef {
+  const employee = params.agentId ? params.cfg.employees?.find(e => e.id === params.agentId) : undefined;
+
+  if (employee) {
+    const isOverBudget = !budgetManager.isWithinBudget(employee);
+    const useCheap = isOverBudget || params.taskComplexity === "low";
+
+    if (useCheap && employee.cheapModel) {
+      return parseModelRef(employee.cheapModel, DEFAULT_PROVIDER) || { provider: DEFAULT_PROVIDER, model: DEFAULT_MODEL };
+    }
+
+    if (params.taskComplexity === "medium" && employee.fallbackModel) {
+      return parseModelRef(employee.fallbackModel, DEFAULT_PROVIDER) || { provider: DEFAULT_PROVIDER, model: DEFAULT_MODEL };
+    }
+
+    return parseModelRef(employee.primaryModel, DEFAULT_PROVIDER) || { provider: DEFAULT_PROVIDER, model: DEFAULT_MODEL };
+  }
+
   const agentModelOverride = params.agentId
     ? resolveAgentModelPrimary(params.cfg, params.agentId)
     : undefined;

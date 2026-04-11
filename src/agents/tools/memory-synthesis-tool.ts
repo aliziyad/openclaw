@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { loadConfig } from "../../config/config.js";
 import type { OpenClawConfig } from "../../config/config.js";
 import type { AnyAgentTool } from "./common.js";
 import { resolveAgentWorkspaceDir, resolveSessionAgentId } from "../agent-scope.js";
@@ -48,6 +49,8 @@ export function createMemorySynthesizeTool(options: {
       // or a specific prompt to the current agent to perform the synthesis.
       // For now, we will set up the structure and provide a helpful response.
 
+      const cfg = loadConfig();
+      // Logic to find employee/department could be added here
       const sopDir = path.join(workspaceDir, "memory", "sops");
       const fileName = `${targetSopName.toLowerCase().replace(/[^a-z0-9]/g, "_")}.md`;
       const filePath = path.join(sopDir, fileName);

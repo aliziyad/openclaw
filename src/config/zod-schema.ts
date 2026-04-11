@@ -35,6 +35,43 @@ const McpSchema = z
   .strict()
   .optional();
 
+const CompanyGoalSchema = z
+  .object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string(),
+    status: z.enum(["pending", "in-progress", "completed"]),
+    priority: z.enum(["low", "medium", "high"]),
+  })
+  .strict();
+
+const BusinessSchema = z
+  .object({
+    name: z.string(),
+    vision: z.string(),
+    mission: z.string(),
+    goals: z.array(CompanyGoalSchema),
+    budget: z.object({
+      totalLimit: z.number().positive(),
+      currency: z.string().default("USD"),
+      period: z.enum(["monthly", "total"]),
+    }),
+  })
+  .strict()
+  .optional();
+
+const EmployeeSchema = z
+  .object({
+    id: z.string(),
+    role: z.string(),
+    department: z.string(),
+    budgetLimit: z.number().positive(),
+    primaryModel: z.string(),
+    fallbackModel: z.string().optional(),
+    cheapModel: z.string().optional(),
+  })
+  .strict();
+
 const NodeHostSchema = z
   .object({
     browserProxy: z
@@ -377,6 +414,8 @@ export const OpenClawSchema = z
       .strict()
       .optional(),
     mcp: McpSchema,
+    business: BusinessSchema,
+    employees: z.array(EmployeeSchema).optional(),
     gateway: z
       .object({
         port: z.number().int().positive().optional(),

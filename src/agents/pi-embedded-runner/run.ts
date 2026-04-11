@@ -44,6 +44,7 @@ import {
   type FailoverReason,
 } from "../pi-embedded-helpers.js";
 import { normalizeUsage, type UsageLike } from "../usage.js";
+import { budgetManager } from "../../infra/budget-manager.js";
 import { compactEmbeddedPiSessionDirect } from "./compact.js";
 import { resolveGlobalLane, resolveSessionLane } from "./lanes.js";
 import { log } from "./logger.js";
@@ -639,6 +640,15 @@ export async function runEmbeddedPiAgent(
           }
 
           const usage = normalizeUsage(lastAssistant?.usage as UsageLike);
+
+          // Record spend for budget tracking
+          const cost = budgetManager.calculateCost(
+            `${provider}/${modelId}`,
+            usage.inputTokens ?? 0,
+            usage.outputTokens ?? 0
+          );
+          void budgetManager.recordSpend(sessionAgentId, cost, params.config ?? {});
+
           const agentMeta: EmbeddedPiAgentMeta = {
             sessionId: sessionIdUsed,
             provider: lastAssistant?.provider ?? provider,

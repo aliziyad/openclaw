@@ -20,6 +20,7 @@ import { createTtsTool } from "./tools/tts-tool.js";
 import { createWebFetchTool, createWebSearchTool } from "./tools/web-tools.js";
 import { createJournalTool } from "./tools/journal-tool.js";
 import { createMemorySynthesizeTool } from "./tools/memory-synthesis-tool.js";
+import { createHireEmployeeTool } from "./tools/hire-employee-tool.js";
 import { mcpManager } from "../plugins/mcp.js";
 
 export function createOpenClawTools(options?: {
@@ -159,6 +160,10 @@ export function createOpenClawTools(options?: {
         config: options?.config,
         agentSessionKey: options?.agentSessionKey,
         workspaceDir: options?.workspaceDir
+      }),
+      createHireEmployeeTool({
+        config: options?.config,
+        agentSessionKey: options?.agentSessionKey
       })
     ] : []).filter(Boolean) as AnyAgentTool[],
   ];

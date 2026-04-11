@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { loadConfig } from "../../config/config.js";
 import type { OpenClawConfig } from "../../config/config.js";
 import type { AnyAgentTool } from "./common.js";
 import { resolveAgentWorkspaceDir } from "../agent-scope.js";
@@ -43,7 +44,11 @@ export function createJournalTool(options: {
       const shortcuts = params.shortcuts as string[] | undefined;
       const outcome = (params.outcome as string) ?? "success";
 
-      const journalDir = path.join(workspaceDir, "memory", "journals");
+      const cfg = loadConfig();
+      const employee = cfg.employees?.find(e => e.id === readStringParam(params, "id"));
+      const journalDir = employee
+        ? path.join(workspaceDir, "company", "departments", employee.department, "journals")
+        : path.join(workspaceDir, "memory", "journals");
       const fileName = `${taskName.toLowerCase().replace(/[^a-z0-9]/g, "_")}.md`;
       const filePath = path.join(journalDir, fileName);
 
