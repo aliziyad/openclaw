@@ -7,14 +7,17 @@ export function buildPairingReply(params: {
   code: string;
 }): string {
   const { channel, idLine, code } = params;
+  const capitalizedChannel = channel.charAt(0).toUpperCase() + channel.slice(1);
   return [
-    "OpenClaw: access not configured.",
+    `🦞 Welcome to OpenClaw!`,
     "",
-    idLine,
+    `I'm your personal AI assistant, but I haven't been introduced to you on ${capitalizedChannel} yet.`,
     "",
-    `Pairing code: ${code}`,
+    `Your secure pairing code is: **${code}**`,
     "",
-    "Ask the bot owner to approve with:",
-    formatCliCommand(`openclaw pairing approve ${channel} <code>`),
+    "To grant me access, please tell the bot owner to run this command in their terminal:",
+    formatCliCommand(`openclaw pairing approve ${channel} ${code}`),
+    "",
+    "Once approved, I'll be ready to help you here!",
   ].join("\n");
 }

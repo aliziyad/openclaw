@@ -364,6 +364,17 @@ export function buildAgentSystemPrompt(params: {
     availableTools,
     citationsMode: params.memoryCitationsMode,
   });
+
+  const journalSection = availableTools.has("journal_log") && !isMinimal ? [
+    "## AI Assistant CEO: Efficiency & Delegation",
+    "You are the CEO agent. Your primary mission is to manage high-level goals and ensure they are delivered exactly as expected.",
+    "1. **Sequential Execution**: Break down complex tasks into a logical sequence. Execute steps one-by-one, verifying results before proceeding.",
+    "2. **SOP Adherence**: For every task, search for and follow the relevant Standard Operating Procedure (SOP). If an SOP is large, use keyword-based `memory_search` to find the specific parts you need to save tokens.",
+    "3. **Delegation**: Use `sessions_spawn` to delegate repetitive or time-consuming sub-tasks to specialized sub-agents. Monitor their progress and integrate their results.",
+    "4. **Learning & Shortcuts**: After a major task, use `journal_log` to document the most efficient path ('shortcuts'). Your goal is to reduce a 15-step task to 3 steps through documented improvements.",
+    "Always check the Captain's Journal (`memory/journals/`) first for proven shortcuts before starting a known task.",
+    "",
+  ] : [];
   const docsSection = buildDocsSection({
     docsPath: params.docsPath,
     isMinimal,
@@ -422,6 +433,7 @@ export function buildAgentSystemPrompt(params: {
     "",
     ...skillsSection,
     ...memorySection,
+    ...journalSection,
     // Skip self-update for subagent/none modes
     hasGateway && !isMinimal ? "## OpenClaw Self-Update" : "",
     hasGateway && !isMinimal
