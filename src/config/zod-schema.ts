@@ -19,22 +19,6 @@ const BrowserSnapshotDefaultsSchema = z
   .strict()
   .optional();
 
-const McpServerSchema = z
-  .object({
-    command: z.string(),
-    args: z.array(z.string()).optional(),
-    env: z.record(z.string(), z.string()).optional(),
-  })
-  .strict();
-
-const McpSchema = z
-  .object({
-    enabled: z.boolean().optional(),
-    servers: z.record(z.string(), McpServerSchema).optional(),
-  })
-  .strict()
-  .optional();
-
 const NodeHostSchema = z
   .object({
     browserProxy: z
@@ -376,7 +360,6 @@ export const OpenClawSchema = z
       })
       .strict()
       .optional(),
-    mcp: McpSchema,
     gateway: z
       .object({
         port: z.number().int().positive().optional(),

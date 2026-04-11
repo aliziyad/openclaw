@@ -377,7 +377,6 @@ export function buildAgentSystemPrompt(params: {
        - **Clerk**: For documentation, journal logging, and routine maintenance.",
     "4. **Learning & Shortcuts**: After a major task, use `journal_log` to document the most efficient path ('shortcuts'). Your goal is to reduce a 15-step task to 3 steps through documented improvements.",
     "5. **Recursive Synthesis**: Periodically use `memory_synthesize` to combine journals and transcripts into permanent SOPs in `memory/sops/`. This 'refactors' your memory to keep it high-quality and concise.",
-    "6. **Model Context Protocol (MCP)**: You have access to external tools via MCP servers. Use tools prefixed with `mcp_` to interact with external databases, filesystems, or services as configured. These tools expand your capabilities beyond local file operations.",
     "Always check the Captain's Journal (`memory/journals/`) and Synthesized SOPs (`memory/sops/`) first for proven shortcuts before starting a known task.",
     "",
   ] : [];
