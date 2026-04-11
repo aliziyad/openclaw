@@ -326,7 +326,11 @@ export function resolveHeartbeatIntervalMs(
 }
 
 export function resolveHeartbeatPrompt(cfg: OpenClawConfig, heartbeat?: HeartbeatConfig) {
-  return resolveHeartbeatPromptText(heartbeat?.prompt ?? cfg.agents?.defaults?.heartbeat?.prompt);
+  const mode = heartbeat?.mode ?? cfg.agents?.defaults?.heartbeat?.mode ?? "full";
+  return resolveHeartbeatPromptText(
+    heartbeat?.prompt ?? cfg.agents?.defaults?.heartbeat?.prompt,
+    mode,
+  );
 }
 
 function resolveHeartbeatAckMaxChars(cfg: OpenClawConfig, heartbeat?: HeartbeatConfig) {

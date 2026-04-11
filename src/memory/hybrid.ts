@@ -100,7 +100,15 @@ export function mergeHybridResults(params: {
   }
 
   const merged = Array.from(byId.values()).map((entry) => {
-    const score = params.vectorWeight * entry.vectorScore + params.textWeight * entry.textScore;
+    let score = params.vectorWeight * entry.vectorScore + params.textWeight * entry.textScore;
+
+    // Prioritize Captain's Journal and SOP entries
+    if (entry.path.startsWith("memory/journals/")) {
+      score *= 1.5;
+    } else if (entry.path.includes("/SOP/") || entry.path.includes("/sop/") || entry.path.startsWith("sop/")) {
+      score *= 1.3;
+    }
+
     return {
       path: entry.path,
       startLine: entry.startLine,

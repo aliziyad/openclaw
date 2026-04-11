@@ -18,6 +18,7 @@ import { createSessionsSendTool } from "./tools/sessions-send-tool.js";
 import { createSessionsSpawnTool } from "./tools/sessions-spawn-tool.js";
 import { createTtsTool } from "./tools/tts-tool.js";
 import { createWebFetchTool, createWebSearchTool } from "./tools/web-tools.js";
+import { createJournalTool } from "./tools/journal-tool.js";
 
 export function createOpenClawTools(options?: {
   sandboxBrowserBridgeUrl?: string;
@@ -146,6 +147,11 @@ export function createOpenClawTools(options?: {
     ...(webSearchTool ? [webSearchTool] : []),
     ...(webFetchTool ? [webFetchTool] : []),
     ...(imageTool ? [imageTool] : []),
+    ...(options?.workspaceDir ? [createJournalTool({
+      config: options?.config,
+      agentSessionKey: options?.agentSessionKey,
+      workspaceDir: options?.workspaceDir
+    })] : []).filter(Boolean) as AnyAgentTool[],
   ];
 
   const pluginTools = resolvePluginTools({
