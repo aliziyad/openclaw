@@ -1,0 +1,19 @@
+{
+  "id": "hub",
+  "name": "Hub",
+  "description": "Paperclip-style operations dashboard with Hermes self-improving skills, MCP, budget management, user modeling, and social media automation.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "port": {
+        "type": "number",
+        "description": "Dashboard HTTP port (default: 3001)"
+      },
+      "upstreamSyncEnabled": {
+        "type": "boolean",
+        "description": "Periodically check OpenClaw and Hermes upstream for updates"
+      }
+    }
+  }
+}

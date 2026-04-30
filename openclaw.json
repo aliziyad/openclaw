@@ -1,4 +1,10 @@
 {
+  "plugins": {
+    "enabled": true,
+    "load": {
+      "paths": ["./extensions/hub"]
+    }
+  },
   "agents": {
     "defaults": {
       "model": "anthropic/claude-3-5-sonnet-latest",

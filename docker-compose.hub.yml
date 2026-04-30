@@ -1,0 +1,86 @@
+version: "3.9"
+
+# Hub deployment: OpenClaw + Postiz + Postgres + Redis
+# Usage: docker compose -f docker-compose.hub.yml up -d
+
+services:
+  openclaw-gateway:
+    image: ${OPENCLAW_IMAGE:-openclaw:local}
+    restart: unless-stopped
+    init: true
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN:-}
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY:-}
+    volumes:
+      - openclaw-config:/home/node/.openclaw
+      - openclaw-workspace:/home/node/.openclaw/workspace
+      - openclaw-hub-state:/home/node/.openclaw/hub-state
+    ports:
+      - "${OPENCLAW_GATEWAY_PORT:-18789}:18789"
+      - "${HUB_DASHBOARD_PORT:-3001}:3001"
+    command:
+      ["node", "dist/index.js", "gateway", "--bind", "lan", "--port", "18789"]
+    depends_on:
+      - postgres
+
+  postiz:
+    image: ghcr.io/gitroomhq/postiz-app:latest
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postiz:${POSTGRES_PASSWORD:-postiz123}@postgres:5432/postiz
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${POSTIZ_JWT_SECRET:-changeme-in-production}
+      NEXT_PUBLIC_BACKEND_URL: http://postiz:3000
+      FRONTEND_URL: http://postiz:3000
+      BACKEND_INTERNAL_URL: http://postiz:3000
+    ports:
+      - "${POSTIZ_PORT:-3000}:3000"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postiz
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postiz123}
+      POSTGRES_DB: postiz
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: ${N8N_USER:-admin}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD:-changeme}
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: postiz
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD:-postiz123}
+    volumes:
+      - n8n-data:/home/node/.n8n
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    depends_on:
+      - postgres
+
+volumes:
+  openclaw-config:
+  openclaw-workspace:
+  openclaw-hub-state:
+  postgres-data:
+  redis-data:
+  n8n-data:

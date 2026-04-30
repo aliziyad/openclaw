@@ -1,0 +1,24 @@
+{
+  "name": "@openclaw/hub",
+  "version": "1.0.0",
+  "description": "Hub: Paperclip-style dashboard + Hermes features for OpenClaw",
+  "type": "module",
+  "main": "index.ts",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "scripts": {
+    "dashboard:dev": "cd dashboard && pnpm dev",
+    "dashboard:build": "cd dashboard && pnpm build"
+  },
+  "dependencies": {
+    "hono": "*",
+    "croner": "*",
+    "sqlite-vec": "*"
+  },
+  "devDependencies": {
+    "openclaw": "workspace:*"
+  }
+}
