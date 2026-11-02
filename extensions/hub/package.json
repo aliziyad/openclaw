@@ -11,7 +11,9 @@
   },
   "scripts": {
     "dashboard:dev": "cd dashboard && pnpm dev",
-    "dashboard:build": "cd dashboard && pnpm build"
+    "dashboard:build": "cd dashboard && pnpm build",
+    "build:server": "esbuild standalone.ts --bundle --platform=node --format=esm --target=node22 --external:node:sqlite --outfile=dist/standalone.mjs",
+    "start": "pnpm dashboard:build && pnpm build:server && HUB_PORT=${HUB_PORT:-1420} node dist/standalone.mjs"
   },
   "dependencies": {
     "hono": "*",

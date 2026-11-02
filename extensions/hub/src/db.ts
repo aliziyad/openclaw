@@ -1,22 +1,17 @@
-import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
 import fs from "node:fs";
 
-// Use synchronous require for better-sqlite3 (native module)
-const _require = createRequire(import.meta.url);
-
-export type HubDb = ReturnType<typeof openDb>;
+export type HubDb = DatabaseSync;
 
 export function openDb(stateDir: string) {
   fs.mkdirSync(stateDir, { recursive: true });
   const dbPath = path.join(stateDir, "hub.db");
 
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const Database = _require("better-sqlite3");
-  const db = new Database(dbPath) as import("better-sqlite3").Database;
+  const db = new DatabaseSync(dbPath);
 
-  db.pragma("journal_mode = WAL");
-  db.pragma("foreign_keys = ON");
+  db.exec("PRAGMA journal_mode = WAL");
+  db.exec("PRAGMA foreign_keys = ON");
 
   db.exec(`
     -- Businesses (the 3 orgs from the blueprint)
